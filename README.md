@@ -13,3 +13,7 @@ ____
 ### 1. Разработка пользовательского интерфейса
 В ходе выполнения работы был разработан пользовательский интерфейс при помощи графического редактора [Figma](https://www.figma.com/community)
 ![login](https://user-images.githubusercontent.com/98755619/212743893-db3e8172-34af-42ba-bd29-508999045220.png)
+![index](https://user-images.githubusercontent.com/98755619/212744105-399600d8-0f90-45bf-b852-6036f868bce7.png)
+![chat](https://user-images.githubusercontent.com/98755619/212744124-92aae008-91b8-4525-8b45-06741b5eef4a.png)
+
+### 2. Описание пользовательских сценариев работы
