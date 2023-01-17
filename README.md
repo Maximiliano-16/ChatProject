@@ -25,9 +25,12 @@ ____
 
 
 ### 4. Описание структура базы данных
-
+![bd](https://user-images.githubusercontent.com/98755619/212910219-808d8b14-4b17-4a3b-959e-19ce7841b0e0.png)
 
 ### 5. Алгоритмы
+![diagram login](https://user-images.githubusercontent.com/98755619/212920271-ce4844c5-905c-4d23-b219-0ad215e116ed.png)
+![main drawio](https://user-images.githubusercontent.com/98755619/212920309-0cb17b63-30a9-4246-887f-680197b858a9.png)
+![chat drawio](https://user-images.githubusercontent.com/98755619/212920349-89f2a422-8798-4ed5-a428-385b8bb7523f.png)
 
 
 ### 6. Значимые части кода
