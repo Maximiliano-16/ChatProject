@@ -22,7 +22,7 @@ ____
 3) Клиент может открыть чат, в котором состоит, и начать общаться, а при желании может выйти из чата.
 
 ### 3. Описание API сервера и хореографии
-
+![диаграмма](https://user-images.githubusercontent.com/98755619/213705573-38a38835-3cb7-45e6-9283-82926910c0cf.png)
 
 ### 4. Описание структура базы данных
 ![bd](https://user-images.githubusercontent.com/98755619/212910219-808d8b14-4b17-4a3b-959e-19ce7841b0e0.png)
@@ -34,3 +34,74 @@ ____
 
 
 ### 6. Значимые части кода
+
+Код моделей:
+```
+class Room(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    room_name = models.CharField(max_length=255)
+    members = models.ManyToManyField(
+        User,
+        related_name='users_in_room',
+        verbose_name='Участники_беседы',
+        blank=True
+    )
+
+    def __str__(self):
+        return self.room_name
+
+
+class Message(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    message = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='messages',
+        blank=True
+    )
+```
+
+Функция создания комнат:
+```
+def index(request):
+    if request.method == 'POST':
+        room = request.POST['room']
+        username = request.user.username
+        if Room.objects.filter(room_name=room).exists():
+            new_room = Room.objects.get(room_name=room)
+            new_room.members.add(request.user)
+            return redirect('MainChat:room', room_name=room, username=username)
+        new_room = Room.objects.create(room_name=room)
+        new_room.members.add(request.user)
+        return redirect('MainChat:room', room_name=new_room.room_name,
+                        username=username)
+
+    context = {
+
+    }
+    return render(request, 'MainChat/index.html', context)
+```
+
+JS функции для вывода сообщений
+```
+$(document).on('submit', '#message', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: "",
+        data: {
+            message: $('#msg').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        }
+    });
+    $( ".parent" ).load(window.location.href + " .parent" );
+})
+
+$(document).ready(function(){
+    setInterval(function(){
+        $( ".message" ).load(window.location.href + " .message" );
+    }, 10000)
+})
+```
